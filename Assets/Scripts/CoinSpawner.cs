@@ -15,6 +15,14 @@ public class CoinSpawner : MonoBehaviour
         timeToNextSpawn = timeBetweenSpawns;
     }
 
+    void Spawn()
+    {
+        for (float i = 0; i<50; i++)
+        {
+            Instantiate(prefab, new Vector2(-50.0f + 2f*i,12),Quaternion.identity);
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -22,7 +30,7 @@ public class CoinSpawner : MonoBehaviour
         timeToNextSpawn -= Time.deltaTime;
         if (timeToNextSpawn <= 0.0f)
         {
-            Debug.Log("Timer is up!");
+            Spawn();
             timeToNextSpawn = timeBetweenSpawns;
         }
     }

@@ -18,6 +18,12 @@ public class CoinSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // Running at fps (usually 60)
+        timeToNextSpawn -= Time.deltaTime;
+        if (timeToNextSpawn <= 0.0f)
+        {
+            Debug.Log("Timer is up!");
+            timeToNextSpawn = timeBetweenSpawns;
+        }
     }
 }

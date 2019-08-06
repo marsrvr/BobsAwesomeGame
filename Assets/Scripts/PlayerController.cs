@@ -46,7 +46,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log(other.gameObject.tag);
         if (other.gameObject.CompareTag("ground"))
         {
             timesJumped = 0;

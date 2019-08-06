@@ -6,9 +6,11 @@ public class PlayerController : MonoBehaviour
 {
 
     public float speed;       // character speed.
-    public float jumpForce;   // How much are we jumping?
 
-    public bool isJumping;    // jumping state
+    public float jumpForce;   // How much are we jumping?
+    public float jumpsAllowed; // How many mid-air jumps
+    private float timesJumped; // Jump counter
+    private float previousJumpInput; // hogging the jump key?
 
     private Rigidbody2D rb;   // character body
 
@@ -19,7 +21,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        isJumping = false;
+        timesJumped = 0;
+        previousJumpInput = 0;
     }
 
     // Updates physics engine.
@@ -31,11 +34,13 @@ public class PlayerController : MonoBehaviour
 
         // -1 is down, 0 is still, 1 is up
         jumpInputV = Input.GetAxis("Vertical");
-        if (jumpInputV > 0 && isJumping == false) // is a float
+        if (jumpInputV > 0 && timesJumped < jumpsAllowed && previousJumpInput == 0) // is a float
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            isJumping = true;
+            timesJumped++;
         }
+
+        previousJumpInput = jumpInputV;
 
     }
 
@@ -44,7 +49,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log(other.gameObject.tag);
         if (other.gameObject.CompareTag("ground"))
         {
-            isJumping = false;
+            timesJumped = 0;
         }
     }
 

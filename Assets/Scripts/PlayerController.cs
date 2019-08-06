@@ -50,6 +50,10 @@ public class PlayerController : MonoBehaviour
         {
             timesJumped = 0;
         }
+        else if (other.gameObject.CompareTag("coin"))
+        {
+            Destroy(other.gameObject);
+        }
     }
 
     // Update is called once per frame

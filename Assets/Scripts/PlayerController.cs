@@ -53,9 +53,12 @@ public class PlayerController : MonoBehaviour
         else if (other.gameObject.CompareTag("coin"))
         {
             Destroy(other.gameObject);
-        }
-    }
 
+            // text manager changing text
+            textManager.instance.increaseScore();
+        }
+
+    }
     // Update is called once per frame
     void Update()
     {
